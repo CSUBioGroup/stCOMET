@@ -46,3 +46,15 @@ Install the Python dependencies with:
 ```bash
 pip install -r requirements.txt
 ```
+## Compared Methods
+
+The following state-of-the-art methods were used for performance benchmarking:
+
+- [SpatialPCA](https://www.nature.com/articles/s41467-022-34879-1)
+- [SpaGCN](https://www.nature.com/articles/s41592-021-01255-8)
+- [CCST](https://www.nature.com/articles/s43588-022-00266-5)
+- [conST](https://doi.org/10.1101/2022.01.14.476408)
+- [DeepST](https://academic.oup.com/nar/article/50/22/e131/6761985)
+- [STAGATE](https://www.nature.com/articles/s41467-022-29439-6)
+- [SpaceFlow](https://www.nature.com/articles/s41467-022-31739-w)
+- [GraphST](https://www.nature.com/articles/s41467-023-36796-3)
