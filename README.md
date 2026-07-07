@@ -61,23 +61,13 @@ pip install -r requirements.txt
 ```python
 import scanpy as sc
 import torch
-from stCOMET import stCOMET, stcomet_spatial_clustering, preprocess_stcomet
+from GraphST import stCOMET, stcomet_spatial_clustering, preprocess_stcomet
 
 # Load spatial transcriptomics data.
 adata = sc.read_h5ad("path/to/your_data.h5ad")
 
-# Preprocess data using the fixed stCOMET settings.
-preprocess_stcomet(
-    adata,
-    use_spatial_smooth=False,
-    n_top_genes=3000,
-    use_gene_module_filter=True,
-    min_module_size=80,
-    min_keep_genes=500,
-    leiden_resolution=1.5,
-    gene_neighbors=10,
-    n_pcs=30,
-)
+# Preprocess data using the default fixed stCOMET settings.
+preprocess_stcomet(adata)
 
 adata.obsm.pop("feat", None)
 adata.obsm.pop("feat_a", None)
@@ -89,12 +79,6 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = stCOMET(
     adata,
     device=device,
-    epochs=600,
-    n_clusters=7,
-    random_seed=41,
-    enhancer_heads=1,
-    recon_weight=0.7,
-    contrastive_weight=0.5,
 )
 
 adata = model.train_stcomet()
@@ -103,13 +87,7 @@ adata = model.train_stcomet()
 print(adata.obsm["emb"].shape)
 
 # Perform spatial domain clustering.
-stcomet_spatial_clustering(
-    adata,
-    n_clusters=7,
-    method="mclust",
-    refinement=True,
-    radius=50,
-)
+stcomet_spatial_clustering(adata)
 
 # The predicted spatial domains are stored in adata.obs["domain"].
 adata.write_h5ad("stcomet_result.h5ad")
