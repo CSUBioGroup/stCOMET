@@ -61,7 +61,7 @@ pip install -r requirements.txt
 ```python
 import scanpy as sc
 import torch
-from GraphST import stCOMET, stcomet_spatial_clustering, preprocess_stcomet
+from stCOMET import stCOMET, stcomet_spatial_clustering, preprocess_stcomet
 
 # Load spatial transcriptomics data.
 adata = sc.read_h5ad("path/to/your_data.h5ad")
