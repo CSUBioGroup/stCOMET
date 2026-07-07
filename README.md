@@ -126,5 +126,4 @@ The following state-of-the-art methods were used for performance benchmarking:
 - [conST](https://doi.org/10.1101/2022.01.14.476408)
 - [DeepST](https://academic.oup.com/nar/article/50/22/e131/6761985)
 - [STAGATE](https://www.nature.com/articles/s41467-022-29439-6)
-- [SpaceFlow](https://www.nature.com/articles/s41467-022-31739-w)
 - [GraphST](https://www.nature.com/articles/s41467-023-36796-3)
