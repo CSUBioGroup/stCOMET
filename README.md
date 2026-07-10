@@ -47,52 +47,9 @@ Install the Python dependencies with:
 ```bash
 pip install -r requirements.txt
 ```
-## Running 
+## Tutorial
+For the step-by-step tutorial, please refer to: https://stcomet.readthedocs.io/en/latest/tutorial.html
 
-Run commands from the repository root so that the `stCOMET` package can be imported correctly.
-
-```bash
-git clone https://github.com/CSUBioGroup/stCOMET.git
-cd stCOMET
-pip install -r requirements.txt
-```
-
-`stCOMET` takes an `AnnData` object as input. The input object should contain the gene expression matrix in `adata.X` and spatial coordinates in `adata.obsm["spatial"]`.
-
-```python
-import scanpy as sc
-import torch
-from stCOMET import stCOMET, stcomet_spatial_clustering, preprocess_stcomet
-
-# Load spatial transcriptomics data.
-adata = sc.read_h5ad("path/to/your_data.h5ad")
-
-# Preprocess data using the default fixed stCOMET settings.
-preprocess_stcomet(adata)
-
-adata.obsm.pop("feat", None)
-adata.obsm.pop("feat_a", None)
-
-# Select device.
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-# Train stCOMET and obtain spot embeddings.
-model = stCOMET(
-    adata,
-    device=device,
-)
-
-adata = model.train_stcomet()
-
-# The learned representation is stored in adata.obsm["emb"].
-print(adata.obsm["emb"].shape)
-
-# Perform spatial domain clustering.
-stcomet_spatial_clustering(adata)
-
-```
-
-If `method="mclust"` is used for clustering, the R package `mclust` and `rpy2` should be available in the environment.
 ## Compared Methods
 
 The following state-of-the-art methods were used for performance benchmarking:
